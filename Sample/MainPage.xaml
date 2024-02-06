@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             xmlns:lc="clr-namespace:MauiApp3"
+             x:Class="MauiApp3.MainPage">
+    <ContentPage.Resources>
+        <lc:ValueConverter x:Key="ValueConverter" />
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <Stepper x:Name="stepper">
+                <Stepper.Value>
+                    <MultiBinding Converter="{StaticResource ValueConverter}" Mode="TwoWay"
+ConverterParameter="1">
+                        <Binding  Path="Price" />
+                    </MultiBinding>
+                </Stepper.Value>
+            </Stepper>
+
+            <HorizontalStackLayout>
+                <Label Text="Stepper Value : "/>
+                <Label Text="{Binding Source={x:Reference stepper},Path=Value}"/>
+            </HorizontalStackLayout>
+            
+          
+            <Entry x:Name="entry" >
+                <Entry.Text>
+                    <MultiBinding Converter="{StaticResource ValueConverter}" Mode="TwoWay"
+              ConverterParameter="1">
+                        <Binding Path="Price" />
+                    </MultiBinding>
+                </Entry.Text>
+            </Entry>
+
+            <HorizontalStackLayout>
+                <Label Text="Entry Text : "/>
+                <Label Text="{Binding Source={x:Reference entry},Path=Text}"/>
+            </HorizontalStackLayout>
+
+            <Button
+                x:Name="CounterBtn"
+                Text="Click me" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
